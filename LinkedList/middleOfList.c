@@ -30,6 +30,7 @@ void printMiddle(struct node *head_ref)
 {
 	int count=0;
 	struct node *mid=head_ref;
+	/* Update mid when count is odd */
 	while(head_ref!=NULL)
 	{
 		if(count & 1)
@@ -37,6 +38,7 @@ void printMiddle(struct node *head_ref)
 		++count;
 		head_ref=head_ref->next;
 	}
+	/* If empty list is provided */
 	if(mid!=NULL)
 	printf("Middle element is:%d\n",mid->data);
 }
