@@ -14,10 +14,10 @@ void push(struct node **head_ref,int x)
 	(*head_ref)=new_node;
 }
 /* Function for printing the list */
-void printlist(struct node **head_ref)
+void printlist(struct node *head_ref)
 {
 	struct node *temp;
-	temp=*head_ref;
+	temp=head_ref;
 	while(temp!=NULL)
 	{
 		printf("%d ",temp->data);
@@ -26,18 +26,19 @@ void printlist(struct node **head_ref)
 	printf("\n");
 }
 /*For Printing the Middle of list */
-void printMiddle(struct node **head_ref)
+void printMiddle(struct node *head_ref)
 {
-	struct node *slow_ptr,*fast_ptr;   	
-	/* Take two pointers slow & fast,Move slow for 1step and fast with 2 steps, So when fast ptr is at last element slow ptr will be\
-	 * at middle of list */
-	slow_ptr=fast_ptr=*head_ref;
-	while((fast_ptr!=NULL)&&(fast_ptr->next!=NULL)) //Check for fast ptr reached at last node
+	int count=0;
+	struct node *mid=head_ref;
+	while(head_ref!=NULL)
 	{
-		slow_ptr=slow_ptr->next;		//Moving slow ptr one step
-		fast_ptr=fast_ptr->next->next;		//movin fast ptr two steps
+		if(count & 1)
+			mid=mid->next;
+		++count;
+		head_ref=head_ref->next;
 	}
-	printf("Middle element is:%d\n",slow_ptr->data);
+	if(mid!=NULL)
+	printf("Middle element is:%d\n",mid->data);
 }
 int main()
 {
@@ -50,7 +51,7 @@ int main()
 		printf("Enter data:");
 		scanf("%d",&x);
 		push(&head,x);
-		printlist(&head);
-		printMiddle(&head);
+		printlist(head);
+		printMiddle(head);
 	}	
 }
